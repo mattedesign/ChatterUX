@@ -4,9 +4,9 @@
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": true,
 
-    /* Bundler mode */
+    /* ————— Build hygiene ————— */
+    "skipLibCheck": true,
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
@@ -14,13 +14,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting */
+    /* ————— Linting ————— */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    /* Path mapping */
+    /* ————— Path aliases ————— */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
@@ -31,16 +31,25 @@
       "@/lib/*": ["./lib/*"]
     }
   },
+
+  /* Only include real source code */
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx"
+    "src",
+    "components",
+    "App.tsx",
+    "types.d.ts"
   ],
+
+  /* Explicitly ignore build/tool configs */
   "exclude": [
     "node_modules",
     "dist",
-    "build"
+    "build",
+    "vite.config.ts",          // ⬅️ prevent TS6305
+    "vitest.config.ts",
+    "postcss.config.js",
+    "tailwind.config.{js,ts}"
   ],
+
   "references": [{ "path": "./tsconfig.node.json" }]
 }
